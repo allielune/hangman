@@ -2,94 +2,92 @@
 
 <html lang="en">
 <head>
-<title>2PHangman</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<link rel="stylesheet" href="hangman.css">
-<script src="proj2hangman.js"></script>
+	<title>2PHangman</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<link rel="stylesheet" href="hangman.css">
 </head>
-
 <body>
-	<header>
+<header>
 	<h1>Two-Player Hangman</h1>
-	<form id="play">
+	<form id="play" onsubmit="return false;">
 	  <input type="button" class="button" value="Let's Play" onClick = "startGame()">
 	</form>
 </header>
-
-<div id="top">
-	
-<div class="firstStep">
-	<h5>Current Players</h5>
-	<form id="players" onsubmit="return false;">
-  Player 1: <input type="text" id="player1Name" value="Player 1 name"><br>
-  Player 2: <input type="text" id="player2Name" value="Player 2 name">
-  <button type="submit" onclick="next()">Submit</button>
-</form>
-
-<p id="p1"></p>
-<p id="p2"></p>
+<section id="top" class="clear">
+	<div id="first-step">
+		<h5>Current Players</h5>
+		<form id="players" onsubmit="return false;">
+			<div>
+				<label for="player1-name">Player 1:</label><input type="text" id="player1-name" placeholder="Player 1 name">
+			</div>
+			<div>
+				<label for="player2-name">Player 2:</label><input type="text" id="player2-name" placeholder="Player 2 name">
+			</div>
+			<button type="submit" onclick="next()">Submit</button>
+		</form>
+		<p id="p1"></p>
+		<p id="p2"></p>
 	</div>
-	
-<div class="highScore">
-	<h4>Current High Score</h4>
-	<h5>Player name: <span id="highScorer"></span></h5>
-	<h5>Score: <span id="highest"></span></h5> 
+	<div class="high-score">
+		<h4>Current High Score</h4>
+		<h5>Player name: <span id="highScorer"></span></h5>
+		<h5>Score: <span id="highest"></span></h5> 
 	</div>
-		</div>
-
-<div id="middle">
-	<div class="playerone">
-		<form>
+</section>
+<section id="middle" class="clear">
+	<p id="spaces"></p>
+</section>
+<section id="bottom" class="clear">
+	<div id="playerone">
+		<form onsubmit="return false;">
 			<h3>Player 1: Enter secret word</h3>
-			<input type="password" id="secretWord" placeholder="Secret Word">
+			<input type="password" id="secret-word" placeholder="Secret Word">
 			<button onclick="createWord()">Submit</button>
 		</form>
 	</div>
-	
-	<p id="spaces"></p>
-</div>
- 
+	<div id="gamearea">
+		<img id="gallow-pic" src="Hangman0.jpg" alt="hangman0" width="300" height="300"><br><br>
+		<span class="title">Number of Guesses:</span><span id="numGuesses">&nbsp;</span><br>
+		<span class="title">Score for this round:</span><span id="score">&nbsp;</span><br>
+	</div>
+	<div id="playertwo">
+		<h3>Player 2: Select letter guesses below</h3>
+		<form id="list" onsubmit="return false;">
+			<input type="button" class="letter" onclick="guess(this);" value="A">
+			<input type="button" class="letter" onclick="guess(this);" value="B">
+			<input type="button" class="letter" onclick="guess(this);" value="C">
+			<input type="button" class="letter" onclick="guess(this);" value="D">
+			<input type="button" class="letter" onclick="guess(this);" value="E">
+			<input type="button" class="letter" onclick="guess(this);" value="F">
+			<input type="button" class="letter" onclick="guess(this);" value="G">
+			<input type="button" class="letter" onclick="guess(this);" value="H">
+			<input type="button" class="letter" onclick="guess(this);" value="I">
+			<input type="button" class="letter" onclick="guess(this);" value="J">
+			<input type="button" class="letter" onclick="guess(this);" value="K">
+			<input type="button" class="letter" onclick="guess(this);" value="L">
+			<input type="button" class="letter" onclick="guess(this);" value="M"><br>
+			<input type="button" class="letter" onclick="guess(this);" value="N">
+			<input type="button" class="letter" onclick="guess(this);" value="O">
+			<input type="button" class="letter" onclick="guess(this);" value="P">
+			<input type="button" class="letter" onclick="guess(this);" value="Q">
+			<input type="button" class="letter" onclick="guess(this);" value="R">
+			<input type="button" class="letter" onclick="guess(this);" value="S">
+			<input type="button" class="letter" onclick="guess(this);" value="T">
+			<input type="button" class="letter" onclick="guess(this);" value="U">
+			<input type="button" class="letter" onclick="guess(this);" value="V">
+			<input type="button" class="letter" onclick="guess(this);" value="W">
+			<input type="button" class="letter" onclick="guess(this);" value="X">
+			<input type="button" class="letter" onclick="guess(this);" value="Y">
+			<input type="button" class="letter" onclick="guess(this);" value="Z">
+		</form>
+	</div>
+</section>
 
-<div class="gamearea">
-<img id="gallowPic" src="Hangman0.jpg" alt="hangman0" width="300" height="300"><br><br>
-<span class="title">Number of Guesses:</span><span id="numGuesses">&nbsp;</span><br>
-<span class="title">Score for this round:</span><span id="score">&nbsp;</span><br>
-</div>
-<div class="playertwo">
-<form id="list">
-<h3>Player 2: Select letter guesses below</h3>
-<input type="button" class="letter" onclick="guess(this);" value="A">
-<input type="button" class="letter" onclick="guess(this);" value="B">
-<input type="button" class="letter" onclick="guess(this);" value="C">
-<input type="button" class="letter" onclick="guess(this);" value="D">
-<input type="button" class="letter" onclick="guess(this);" value="E">
-<input type="button" class="letter" onclick="guess(this);" value="F">
-<input type="button" class="letter" onclick="guess(this);" value="G">
-<input type="button" class="letter" onclick="guess(this);" value="H">
-<input type="button" class="letter" onclick="guess(this);" value="I">
-<input type="button" class="letter" onclick="guess(this);" value="J">
-<input type="button" class="letter" onclick="guess(this);" value="K">
-<input type="button" class="letter" onclick="guess(this);" value="L">
-<input type="button" class="letter" onclick="guess(this);" value="M"><br>
-<input type="button" class="letter" onclick="guess(this);" value="N">
-<input type="button" class="letter" onclick="guess(this);" value="O">
-<input type="button" class="letter" onclick="guess(this);" value="P">
-<input type="button" class="letter" onclick="guess(this);" value="Q">
-<input type="button" class="letter" onclick="guess(this);" value="R">
-<input type="button" class="letter" onclick="guess(this);" value="S">
-<input type="button" class="letter" onclick="guess(this);" value="T">
-<input type="button" class="letter" onclick="guess(this);" value="U">
-<input type="button" class="letter" onclick="guess(this);" value="V">
-<input type="button" class="letter" onclick="guess(this);" value="W">
-<input type="button" class="letter" onclick="guess(this);" value="X">
-<input type="button" class="letter" onclick="guess(this);" value="Y">
-<input type="button" class="letter" onclick="guess(this);" value="Z">
-</form>
-</div>
-	
-
-
-
+<!--
+	Script at the bottom of the page so that it's non-blocking for html load
+	and so that vars defined early have html to reference.
+ -->
+<script src="proj2hangman.js"></script>
 </body>
 </html>
 

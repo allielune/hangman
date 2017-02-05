@@ -1,81 +1,110 @@
-(function(){
-"use strict";
+var answerArray = [],
+	spacesArray = [],
+	gallowsCounter = 0,
+	firstStep = document.getElementById("first-step"),
+	player1Name = document.getElementById("player1-name"),
+	player2Name = document.getElementById("player2-name"),
+	p1 = document.getElementById("p1"),
+	p2 = document.getElementById("p2"),
+	playerone = document.getElementById("playerone"),
+	playertwo = document.getElementById("playertwo"),
+	gamearea = document.getElementById("gamearea"),
+	secretWord = document.getElementById("secret-word"),
+	gallowsPic = document.getElementById("gallow-pic"),
+	spaces = document.getElementById("spaces"),
+	p1,
+	p2,
+	word,
+	regex = /[A-Z]/;
 
-var answerArray = [];
-var p1;
-var p2;
-var word;
-var spaces;
-var spacesArray=[];
-var gallowsCounter=0;
-
-console.log("Hello World");
 //click Let's Play to reveal firstStep div
 function startGame() {
-	    document.getElementById("firstStep").style.visibility = "visible";
+    firstStep.style.visibility = "visible";
 }
 //upon entry of player names, function next will store player names as p1 and p2 for use later in high score tracking
 //next() will also reveal the playerone div that asks for the player to enter a secret word
 
 
 function next() {
-    var playerOne = document.getElementById("player1Name").value = "block";
-    document.getElementById("player1Name").innerHTML = p1;
-	
-	var playerTwo = document.getElementById("player2Name").value = "block";
-    document.getElementById("player2Name").innerHTML = p2;
-	
-	document.getElementById("playerone").style.display = "block";
+    p1.innerHTML = player1Name.value;
+    p1.style.visibility = "visible";
+    p2.innerHTML = player2Name.value;
+    p2.style.visibility = "visible";
+	playerone.style.visibility = "visible";
 }
 
 //upon entry of the secret word js stores the entry into variable "secretWord"
-//secretWord is then parsed into the answerArray 
+//secretWord is then parsed into the answerArray
 //answerArray is displayed in the gameArea as lines
 
 function createWord() {
-	console.log("createWord", word);
-	word = document.getElementById("secretWord").value;
+	word = secretWord.value;
 	word = word.toUpperCase();
-    document.getElementById("displayClue").innerHTML = word;
-	answerArray=word.split();
+	answerArray = word.split("");
 	createSpaces();
+	playertwo.style.visibility = "visible";
+	gamearea.style.visibility = "visible";
 }
 
-function createSpaces(){
-	for (var i=0; i < word.length;i++){
-		spacesArray[i]="_";
-	}
-	updateClue();
-}
-function guess(value){
-	var gallows = true;
-	for (var i=0; i < word.length;i++){
-		if (answerArray[i]===value){
-			spacesArray[i]=value;
-			gallows = false;
+function createSpaces() {
+	for (var i = 0; i < answerArray.length; i++) {
+		if (regex.test(answerArray[i])) {
+			spacesArray[i] = "_";
+		} else {
+			spacesArray[i] = answerArray[i];
 		}
 	}
-	if (gallows){
+
+	updateClue();
+}
+
+function guess(element) {
+	var value = element.value,
+		gallows = true,
+		isWinner = true;
+
+	element.setAttribute("disabled", "disabled");
+
+	for (var i = 0; i < answerArray.length; i++) {
+		if (answerArray[i] === value) {
+			spacesArray[i] = value;
+			gallows = false;
+		}
+
+		if (regex.test(answerArray[i]) && spacesArray[i] === "_") {
+			isWinner = false;
+		}
+	}
+
+	if (gallows) {
 		updateGallows();
-	}else{
+	} else {
 		updateClue();
+
+		if (isWinner) {
+			youWin();
+		}
 	}
 }
 
-function updateGallows(){
+function updateGallows() {
 	gallowsCounter++;
-	document.getElementById("gallowPic").src="Hangman"+ gallowsCounter +".jpg";
-	if (gallowsCounter >=7){
+	gallowsPic.src = "Hangman" + gallowsCounter + ".jpg";
+	if (gallowsCounter >= 7) {
 		youLose();
 	}
 }
 
-function updateClue(){
-	spaces = spacesArray.join(" ");
-	document.ElementById("spaces").innerHTML = spaces;
+function updateClue() {
+	var output = spacesArray.join(" ");
+	spaces.innerHTML = output;
 }
 
-function youLose(){
+function youWin() {
+	alert("Winner Winner, Chicken Dinner!");
+}
+
+function youLose() {
 	alert("You Lose Loser!");
 }
 //the playertwo area is also revealed after the secretWord is entered
@@ -88,5 +117,3 @@ function youLose(){
 //if the missedGuesses = 7 (total of eight guesses) then a message that Player One Wins and request if another round should be played
 
 //if another round is to be played, the prompt that Player Two should enter a secret word (replace the Player One as Player Two in playerone div and Player One should replace Player Two in playertwo div.
-
- })();

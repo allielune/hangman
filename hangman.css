@@ -1,15 +1,16 @@
-body{
+body {
+	padding: 10px 50px;
 	font-family: Gill Sans, Gill Sans MT, Myriad Pro, DejaVu Sans Condensed, Helvetica, Arial," sans-serif";
 	background-color: #01FFFF;
-	color: #333333;	
-	}
+	color: #333;
+}
 
-.firstStep {
+#first-step {
 	visibility: hidden;
 	float:left;
 	width: 45%;
 	height: 150px;
-	padding-left:50px;
+	padding-left: 50px;
 }
 
 #p1 {
@@ -23,30 +24,48 @@ body{
 	width: 100%;
 }
 
-.highScore {
+#spaces {
+	height: 50px;
+	font-size: 48px;
+}
+
+.high-score {
 	text-align: left;
 	float:right;
 	width:40%;
 	height: 150px;
 }
-#middle {
-	padding-left: 50px;
+
+#top {
 }
-.playerone {
+
+#middle {
+	text-align: center;
+}
+
+#bottom {
+}
+
+#playerone {
 	/*background-color:red;*/
+	visibility: hidden;
 	float: left;
 	width: 33%;
 	height: 400px;
 }
-.playertwo {
+
+#playertwo {
 	/*background-color:yellow;*/
+	visibility: hidden;
 	float: right;
 	width: 33%;
 	height: 400px;
 	text-align:center;
 	padding-right: 20px;
 }
-.gamearea {
+
+#gamearea {
+	visibility: hidden;
 	text-align: center;
 	padding-left: 50px;
 	/*background-color: green;*/
@@ -70,6 +89,13 @@ h3 {
 h5 {
 	line-height: normal;
 }
+
+.clear {
+	content: "";
+	display: block;
+	clear: both;
+}
+
 /*
 .letters{
 	display:flex;
@@ -182,3 +208,5 @@ button+button{margin-left:16px;}
 #list-form>*{display:block;margin:16px auto;width:400px;}
 
 #list-form textarea{width:700px;height:400px;font-size:20px;font-family:Gill Sans, Gill Sans MT, Myriad Pro, DejaVu Sans Condensed, Helvetica, Arial," sans-serif";}
+
+*/
